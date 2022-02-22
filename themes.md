@@ -1,0 +1,3 @@
+- [Операторы сравнения](https://developer.mozilla.org/ru/docs/Web/JavaScript/Reference/Operators/Operator_Precedence)
+- [Преобразование типов](https://learn.javascript.ru/type-conversions)
+- Условные операторы (if, тернарный)
