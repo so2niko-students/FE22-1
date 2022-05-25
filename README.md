@@ -10,8 +10,6 @@
 
 -   [Адаптивная графика. MDN](https://developer.mozilla.org/ru/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images)
 
--   [Векторная графика. MDN]([https://www.w3schools.com/html/html_forms.asp](https://developer.mozilla.org/ru/docs/Learn/HTML/Multimedia_and_embedding/Adding_vector_graphics_to_the_Web))
-
 ____________________________  
 
 **Вопросы**
