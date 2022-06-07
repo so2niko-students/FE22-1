@@ -1,0 +1,17 @@
+/*Внешние стили*/
+
+/* теговые селекторы */
+body{
+    color: red;
+}
+
+/* классовые */
+.bold{
+    font-weight: 800;
+}
+
+/* идентификатор */
+#header3{
+    text-decoration: underline double;
+}
+
