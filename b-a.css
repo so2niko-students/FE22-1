@@ -1,0 +1,42 @@
+p::first-line{
+    color: red;
+}
+
+p::first-letter{
+    font-size: 40px;
+}
+
+p::before{
+    content: ' ';
+    width: 50px;
+    height: 50px;
+    background-color: black;
+    display: block;
+}
+
+/* https://caniuse.com/ */
+
+.square{
+    width: 100px;
+    height: 100px;
+    background-color: red;
+}
+
+.circle{
+    width: 100px;
+    height: 100px;
+    background-color: blue;
+    border: 3px solid grey;
+    border-radius: 50%;
+}
+/* https://www.w3schools.com/css/css_outline.asp */
+
+.triangle{
+    width: 0px;
+    height: 0px;
+    border-bottom: 100px solid green;
+    border-left: 100px solid blue;
+    border-right: 100px solid red;
+    border-top: 100px solid yellow;
+}
+

@@ -1,0 +1,68 @@
+td{
+    width: 60px;
+    height: 60px;
+    border: 1px solid rgb(36, 5, 5);
+    background-color: rgb(35, 14, 53);
+}
+
+.odd td:nth-child(2n + 1){
+    background-color: beige;
+}
+.even td:nth-child(2n){
+    background-color: beige;
+}
+
+.king{
+    height: 0;
+    width: 0;
+    margin: auto;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+    border-bottom-width: 40px;
+    border-bottom-style: solid;
+}
+
+.black.king{
+    border-bottom-color: black;
+}
+
+.white.king{
+    border-bottom-color: white;
+}
+
+.king::before{
+    content: '᛭';
+    font-size: 30px;
+    font-weight: 800;
+    display: block;
+    position: relative;
+    top: -25px;
+    left: -10px;
+}
+
+.black.king::before{
+    color: black;
+}
+
+.white.king::before{
+    color: white;
+}
+
+.king::after{
+    content: ' ';
+    width: 30px;
+    height: 10px;
+    display: block;
+    position: relative;
+    top: -40px;
+    left: -15px;
+    border-radius: 12px;
+}
+
+.black.king::after{
+    background-color: black;
+}
+
+.white.king::after{
+    background-color: white;
+}
