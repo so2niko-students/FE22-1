@@ -1,0 +1,60 @@
+:root{
+    --bg-checked-label: rgba(200, 100, 100, .5);
+}
+
+.radio-gender:checked+span{
+    font-weight: 800;
+}
+
+.image{
+    width: 400px;
+    height: 600px;
+    background-size: cover;
+}
+
+#i1:checked~.image{
+    background-image: url('./images/maksym-tymchyk-RBCVihNoKJ0-unsplash.jpg');
+}
+#i2:checked~.image{
+    background-image: url('./images/prometheus-design-fDIV22-JhPs-unsplash.jpg');
+}
+#i3:checked~.image{
+    background-image: url('./images/qasim-mirzaie-oHmrAhZiOaY-unsplash.jpg');
+}
+#i4:checked~.image{
+    background-image: url('./images/sebastiano-corti-H3Z0WIGjqqc-unsplash.jpg');
+}
+
+#i1:checked~.container-labels>[for="i1"],
+#i2:checked~.container-labels>[for="i2"],
+#i3:checked~.container-labels>[for="i3"],
+#i4:checked~.container-labels>[for="i4"]{
+    background-color: var(--bg-checked-label);
+}
+
+.carousel label:hover{
+    border-color: black;
+}
+
+.label-carousel{
+    width: 30px;
+    height: 30px;
+    border: 1px solid grey;
+    border-radius: 3px;
+    background-color: rgba(111,111,111,.5);
+    display: inline-block;
+}
+
+.inp-carousel{
+    display: none;
+}
+
+.container-labels{
+    position: relative;
+    top: 40px;
+    width: 400px; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
