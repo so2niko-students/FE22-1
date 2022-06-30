@@ -1,0 +1,23 @@
+.classes{
+    --left-shift: -95px;
+    --left-shift-2: -712px;
+    --top-shift: -115px;
+    --top-shift-3: -1400px;
+    /* ---------------------------------- */
+    background-image: url('../img/alekzander-zagorulko-all.jpg');
+    width: 500px;
+    height: 500px;
+    display: inline-block;
+}
+
+.barbarian{
+    background-position: var(--left-shift) var(--top-shift);
+}
+
+.paladin{
+    background-position: var(--left-shift-2) var(--top-shift);
+}
+
+.hunter{
+    background-position: var(--left-shift-2) var(--top-shift-3);
+}
