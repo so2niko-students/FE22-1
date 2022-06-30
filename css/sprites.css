@@ -21,3 +21,8 @@
 .hunter{
     background-position: var(--left-shift-2) var(--top-shift-3);
 }
+
+.classes:hover{
+    border-radius: 50px;
+    filter: invert(90%);
+}
