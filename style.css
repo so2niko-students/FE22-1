@@ -1,0 +1,54 @@
+body{
+    font-size: 18pt;
+}
+
+body div{
+    margin: 15px;
+    border: 1px solid black;
+}
+
+div:nth-child(2n){
+    background-color: wheat;
+}
+
+.relative{
+    position: relative;
+    color: red;
+    left: 55px;
+    top: -200px;
+    width: 500px;
+}
+
+div.absolute{
+    background-color: aqua;
+    position: absolute;
+    width: 500px;
+    padding: 5px;
+    /* top: 5px; */
+    left: 255px;
+    z-index: 1000001;
+}
+
+div.nav{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    background-color: black;
+    color: white;
+    padding: 15px;
+    margin: 0;
+}
+
+.nav span{
+    margin: 15px;
+}
+
+div.sticky{
+    position: sticky;   
+    background-color: darkblue;
+    color: white;
+    width: 300px;
+    padding: 15px;
+    bottom: 0;
+    z-index: 200000;
+}
