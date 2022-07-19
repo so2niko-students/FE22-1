@@ -1,0 +1,16 @@
+.el{
+    height: 150px;
+    width: 150px;
+    background-color: beige;
+    border: 1px solid  red;
+    /* flex-grow: 1; */
+}
+/* 
+.two{
+    flex-grow: 2;
+} */
+body{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 35px;
+}
