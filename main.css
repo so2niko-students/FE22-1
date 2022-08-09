@@ -1,76 +1,47 @@
-@font-face {
-  font-family: "digital-clock-font";
-  src: url(digital-7.ttf);
+body{
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template: 75px 1fr 75px / 1fr;
 }
 
-.tablo {
-  width: 600px;
-  height: 300px;
+header, footer{
   background-color: black;
 }
 
-.date,
-.time {
-  font-family: "digital-clock-font";
-  color: yellow;
-}
-
-.date {
-  font-size: 44px;
-  position: absolute;
-  left: 112px;
-  top: 55px;
-}
-
-.time {
-  font-size: 140px;
-  position: absolute;
-  left: 105px;
-  top: 85px;
+main{
   display: flex;
-  justify-content: center;
-}
-
-.date div,
-.time div {
-  display: inline;
-}
-
-/* ............................. */
-a {
-  color: fff;
-  text-decoration: none;
-}
-
-a:hover {
-  color: #16d9e3;
-}
-
-.start {
-  font-size: 40px;
-}
-
-.screen {
-  display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 300px;
-  width: 300px;
-  background-color: beige;
+  background-color: blue;
 }
 
-.hidden {
-  display: none;
+.calculator-wrapper{
+  width: 800px;
+  height: 400px;
+  background-color: rgba(1, 1, 1, .7);
+  display: grid;
+  grid-template: 50px 50px repeat(26, 1fr) / repeat(16, 1fr);
 }
 
-.board {
-  position: relative;
-  width: 100px;
-  height: 90px;
-  background: linear-gradient(118.38deg, #4186da -4.6%, #485563 200.44%);
-  box-shadow: -8px -8px 20px #4f88c9, 10px 7px 20px #475462;
-  border-radius: 40px;
-  overflow: hidden;
-  cursor: pointer;
+.calculator-wrapper div{
+  background-color: aqua;
+  border: 3px solid red;
+}
+
+.programm-name{
+  grid-area: 1 / 1 / 1 / span 14;
+}
+
+.control-buttons{
+  grid-area: 1 / 15 / 1 / span 2
+}
+
+.calculator-name{
+  grid-area: 2 / 1 / 2 / span 12;
+}
+
+.btns-history-memory{
+  grid-area: 2 / 13 / 2 / span 4;
 }
