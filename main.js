@@ -1,50 +1,69 @@
-//1. Выгружаю данные с файла
-const DATA = {
-    URL : './data.json',
-    USER : {}
-};
+const el = document.querySelector('.element');
+const output = (txt) => {
+    const output = document.querySelector('.output');
+    output.innerText = txt;
+    output.classList.toggle('output-new');
 
-fetch(DATA.URL).then(r => r.json()).then((d) => {
-    DATA.USER = d;
-    renderUserInfo(d);
+}
+const BG_RED = 'redBG';
+const CIRCLE = 'circle';
+
+el.addEventListener('click', () => {
+    const className = Math.random() > .5 ? BG_RED : CIRCLE;
+
+    el.classList.toggle(className);
 });
 
-//2. Отрендерить данные на странице
-function renderUserInfo({ name, email, dob, password }){
-    const html = `<div class="name">${ name }</div>
-    <div class="password">${ password }</div>
-    <div class="dob">${ dob }</div>
-    <div class="mail">${ email }</div>`;
+el.addEventListener('contextmenu', (ev) => {
+    console.log(el.className);
+    output(ev.pointerType);
+    ev.preventDefault();
+    
+    el.classList.remove(BG_RED, CIRCLE);
+});
 
-    document.querySelector('.info-user').innerHTML = html;
+el.classList.add('square');
+
+el.addEventListener('mouseenter', () => {
+    const tableLog = [
+        {
+            class : BG_RED, 
+            contains : el.classList.contains(BG_RED)
+        },
+        {
+            class : CIRCLE, 
+            contains : el.classList.contains(CIRCLE)
+        }
+    ];
+    console.clear();
+    console.table(tableLog);
+});
+
+const elAttr = document.querySelector('.attr1');
+
+elAttr.addEventListener('click', () => {
+    let r = elAttr.getAttribute('radiusper');
+    r++;
+    elAttr.setAttribute('radiusper', r);
+    elAttr.style.borderRadius = `${ r }%`;
+    console.log(r);
+});
+
+
+elAttr.addEventListener('contextmenu', (ev) => {
+    ev.preventDefault();
+    let h = elAttr.dataset.superpupercolor;
+    h++;
+    elAttr.dataset.superpupercolor = h % 361;
+
+    const color = `hsl(${ h }, 100%, 50%)`;
+    elAttr.style.backgroundColor = color;
+});
+
+function info(ev){
+    console.log(ev);
+    output(`EVENT: ${ ev.type }`);
 }
 
-//3. Отрендерить форму при нажатии на кнопку
-const USER_FORM = {
-    selectors : ['inp-name', 'inp-password', 'inp-dob', 'inp-email']
-}
-
-USER_FORM.elements = USER_FORM.selectors.reduce((acc, s) => {
-    const name = s.split('-').slice(-1);
-    acc[name] = document.querySelector(`.${ s }`);
-    return acc;
-}, {});
-
-const modal = document.querySelector('.modal');
-
-document.querySelector('.btn-change').addEventListener('click', () => {
-    modal.classList.remove('hide');
-    Object.entries(USER_FORM.elements).forEach(([key, val]) => {
-        val.value = DATA.USER[key];
-    });
-});
-
-//4. Сохранение данных после редактирования
-document.querySelector('.btn-save').addEventListener('click', () => {
-    modal.classList.add('hide');
-    Object.entries(USER_FORM.elements).forEach(([key, val]) => {
-        DATA.USER[key] = val.value;
-    });
-
-    renderUserInfo(DATA.USER);
-});
+document.body.addEventListener('click', info);
+document.body.addEventListener('contextmenu', info);
