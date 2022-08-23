@@ -24,4 +24,4 @@
 
 ## Сверстать адаптив
 Сверстайте адаптивно домашнюю страницу для настольного ПК и для телефона
-https://www.figma.com/community/file/1139276953828449081
+https://www.figma.com/file/rtquXeNeLlv4zFp6M7Y9qG/PlantX-Wireframes-Community
