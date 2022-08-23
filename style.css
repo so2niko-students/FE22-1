@@ -1,0 +1,33 @@
+@import url('./grid12.css');
+@import url('./main.css');
+
+body{
+    padding: 0;
+    margin: 0;
+}
+header{
+    background-color: aquamarine;
+    height: 60px;
+}
+
+footer{
+    background-color: darkcyan;
+    color: white;
+    height: 100px;
+}
+
+div{
+    border: 1px solid black;
+    box-sizing: border-box;
+}
+
+header.row>.burger{
+    font-size: 50px;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+    font-weight: 800;
+    background-color: darkslategray;
+    color: white;
+    border: 0;
+}
