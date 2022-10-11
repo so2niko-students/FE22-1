@@ -1,50 +1,43 @@
-//1. Выгружаю данные с файла
-const DATA = {
-    URL : './data.json',
-    USER : {}
-};
+const canvas1 = document.querySelector('#canvas1');
 
-fetch(DATA.URL).then(r => r.json()).then((d) => {
-    DATA.USER = d;
-    renderUserInfo(d);
-});
 
-//2. Отрендерить данные на странице
-function renderUserInfo({ name, email, dob, password }){
-    const html = `<div class="name">${ name }</div>
-    <div class="password">${ password }</div>
-    <div class="dob">${ dob }</div>
-    <div class="mail">${ email }</div>`;
+const drawFlag = (element, text = '', textType = 'fill', font = '14px Arial') => {
+    const ctx = element.getContext('2d');
 
-    document.querySelector('.info-user').innerHTML = html;
+    const grad = ctx.createLinearGradient(100, 0, 100, 100);
+    grad.addColorStop(0, 'blue');
+    grad.addColorStop(1, 'yellow');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, 200, 100);
+
+    ctx.moveTo(0, 0);
+    ctx.lineTo(100, 50);
+    ctx.lineTo(0, 100);
+    
+    ctx.moveTo(125, 50);
+    ctx.arc(100, 50, 25, 0, 2 * Math.PI);
+
+    ctx.font = font;
+    if(textType == 'fill'){
+        ctx.fillText(text, 75, 95);
+    }else{
+        ctx.strokeText(text, 75, 95);
+    }
+    
+    ctx.stroke();
 }
 
-//3. Отрендерить форму при нажатии на кнопку
-const USER_FORM = {
-    selectors : ['inp-name', 'inp-password', 'inp-dob', 'inp-email']
+const drawRadGradient = (element, x0, y0, r0, x1, y1, r1) => {
+    const ctx = element.getContext('2d');
+
+    const grd = ctx.createRadialGradient(x0, y0, r0, x1, y1, r1);
+    grd.addColorStop(0, "red");
+    grd.addColorStop(1, "black");
+
+    // Fill with gradient
+    ctx.fillStyle = grd;
+    ctx.fillRect(0, 0, 200, 100);
 }
 
-USER_FORM.elements = USER_FORM.selectors.reduce((acc, s) => {
-    const name = s.split('-').slice(-1);
-    acc[name] = document.querySelector(`.${ s }`);
-    return acc;
-}, {});
-
-const modal = document.querySelector('.modal');
-
-document.querySelector('.btn-change').addEventListener('click', () => {
-    modal.classList.remove('hide');
-    Object.entries(USER_FORM.elements).forEach(([key, val]) => {
-        val.value = DATA.USER[key];
-    });
-});
-
-//4. Сохранение данных после редактирования
-document.querySelector('.btn-save').addEventListener('click', () => {
-    modal.classList.add('hide');
-    Object.entries(USER_FORM.elements).forEach(([key, val]) => {
-        DATA.USER[key] = val.value;
-    });
-
-    renderUserInfo(DATA.USER);
-});
+drawRadGradient(canvas1, 100, 50, 0.1, 110, 60, 40);
+// drawFlag(canvas1, 'pum-pum', 'stroke', '26px Sans-Serif');
