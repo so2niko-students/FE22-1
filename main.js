@@ -1,50 +1,53 @@
-//1. Выгружаю данные с файла
-const DATA = {
-    URL : './data.json',
-    USER : {}
-};
+const HEADERS = ['request not initialized',
+    'server connection established',
+    'request received',
+    'processing request',
+    'request finished and response is ready'];
 
-fetch(DATA.URL).then(r => r.json()).then((d) => {
-    DATA.USER = d;
-    renderUserInfo(d);
-});
+const testConnection = (url) => {
+    //Запрос через HTTP для передачи XML
+    const ajax = new XMLHttpRequest();//! Создание объекта для отправки и получения данных - AJAX
 
-//2. Отрендерить данные на странице
-function renderUserInfo({ name, email, dob, password }){
-    const html = `<div class="name">${ name }</div>
-    <div class="password">${ password }</div>
-    <div class="dob">${ dob }</div>
-    <div class="mail">${ email }</div>`;
+    //! Настройка
+    //? Настроить поведение при получении ответа с сервера
+    //readystatechange
+    ajax.addEventListener('readystatechange', () => {
+        const state = ajax.readyState;
+        const status = ajax.status;
+        const text = ajax.responseText;
 
-    document.querySelector('.info-user').innerHTML = html;
-}
-
-//3. Отрендерить форму при нажатии на кнопку
-const USER_FORM = {
-    selectors : ['inp-name', 'inp-password', 'inp-dob', 'inp-email']
-}
-
-USER_FORM.elements = USER_FORM.selectors.reduce((acc, s) => {
-    const name = s.split('-').slice(-1);
-    acc[name] = document.querySelector(`.${ s }`);
-    return acc;
-}, {});
-
-const modal = document.querySelector('.modal');
-
-document.querySelector('.btn-change').addEventListener('click', () => {
-    modal.classList.remove('hide');
-    Object.entries(USER_FORM.elements).forEach(([key, val]) => {
-        val.value = DATA.USER[key];
-    });
-});
-
-//4. Сохранение данных после редактирования
-document.querySelector('.btn-save').addEventListener('click', () => {
-    modal.classList.add('hide');
-    Object.entries(USER_FORM.elements).forEach(([key, val]) => {
-        DATA.USER[key] = val.value;
+        console.log(`%c${ Date.now() }
+        readystatechange: 
+        state: ${ state }
+        state: ${ HEADERS[state] }
+        status: ${ status }
+        text: ${ text }`, `color: red;`);
     });
 
-    renderUserInfo(DATA.USER);
-});
+    //load
+    ajax.addEventListener('load', () => {
+        console.log(`${ Date.now() }
+        load:
+        text: ${ ajax.responseText }`);
+    });
+    console.log(Date.now(), 'before open');
+    //? Настроить способ отправки данных на сервер
+    ajax.open('GET', url);
+
+    console.log(Date.now(), 'before send');
+    //! Отправка
+    ajax.send();
+    
+    console.log(Date.now(), 'after send');
+}
+
+//CRUD
+//Create - POST
+//Read - GET
+//Update - UPDATE/PUT
+//Delete - DELETE
+
+// testConnection('./data.json');
+testConnection('https://randomuser.me');
+
+// url?user=11
