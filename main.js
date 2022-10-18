@@ -1,53 +1,74 @@
-const HEADERS = ['request not initialized',
-    'server connection established',
-    'request received',
-    'processing request',
-    'request finished and response is ready'];
+function ajax(url, callback){
+    const aj = new XMLHttpRequest();
+    aj.onload = () => {
+        callback(aj.responseText);
+    }
 
-const testConnection = (url) => {
-    //Запрос через HTTP для передачи XML
-    const ajax = new XMLHttpRequest();//! Создание объекта для отправки и получения данных - AJAX
+    aj.open('GET', url);
 
-    //! Настройка
-    //? Настроить поведение при получении ответа с сервера
-    //readystatechange
-    ajax.addEventListener('readystatechange', () => {
-        const state = ajax.readyState;
-        const status = ajax.status;
-        const text = ajax.responseText;
-
-        console.log(`%c${ Date.now() }
-        readystatechange: 
-        state: ${ state }
-        state: ${ HEADERS[state] }
-        status: ${ status }
-        text: ${ text }`, `color: red;`);
-    });
-
-    //load
-    ajax.addEventListener('load', () => {
-        console.log(`${ Date.now() }
-        load:
-        text: ${ ajax.responseText }`);
-    });
-    console.log(Date.now(), 'before open');
-    //? Настроить способ отправки данных на сервер
-    ajax.open('GET', url);
-
-    console.log(Date.now(), 'before send');
-    //! Отправка
-    ajax.send();
-    
-    console.log(Date.now(), 'after send');
+    aj.send();
 }
 
-//CRUD
-//Create - POST
-//Read - GET
-//Update - UPDATE/PUT
-//Delete - DELETE
+const CSV_LINK = 'https://so2niko-students.github.io/FE22-1/data/POPPROJ_18102022173124332.csv';
 
-// testConnection('./data.json');
-testConnection('https://randomuser.me');
+ajax(CSV_LINK, parser2);
 
-// url?user=11
+function parser1(d){
+    const fStart = Date.now();
+    // console.log(d);
+    const ticksReplacer = '"';
+    const rowSeparator = '\n';
+    const comaSeparator = ',';
+    const dWithoutTicks = d.replaceAll(ticksReplacer, '');
+    const data = dWithoutTicks.split(rowSeparator).map(r => r.split(comaSeparator));
+    const names = data.shift();
+    const formatData = data.map(el => {
+        return names.reduce((acc, name, i) => {
+            acc[name] = el[i];
+            return acc;
+        }, {});
+    });
+
+    const fEnd = Date.now();
+
+    const time = fEnd - fStart;
+    console.log(`TIME: ${ time }ms`);
+    console.log(formatData);
+    saveTime('method1', time);
+}
+
+function parser2(d){
+    const fStart = Date.now();
+    const ticksReplacer = '"';
+    const rowSeparator = '\n';
+    const comaSeparator = ',';
+    const dWithoutTicks = d.replaceAll(ticksReplacer, '');
+    
+    const data = dWithoutTicks.split(rowSeparator);
+
+    const names = data.shift().split(comaSeparator);
+
+    data.map((r) => {
+        const row = r.split(comaSeparator);
+        return names.reduce((acc, name, i) => {
+            acc[name] = row[i];
+            return acc;
+        }, {});
+    });
+
+    const fEnd = Date.now();
+
+    const time = fEnd - fStart;
+    console.log(`TIME: ${ time }ms`);
+    console.log(data);
+    saveTime('method2', time);
+}
+
+function saveTime(name, time){
+    const strData = localStorage.getItem(name) ?? '[]';
+    const data = JSON.parse(strData);
+    data.push(time);
+    const strDataPush = JSON.stringify(data);
+    localStorage.setItem(name, strDataPush);
+    console.log(name, data);
+}
