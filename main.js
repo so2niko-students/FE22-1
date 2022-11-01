@@ -50,7 +50,7 @@ class Cookie{
         if(exdays){
             const d = new Date();
             d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
-            expires = ";expires="+d.toUTCString();
+            expires = ";expires=" + d.toUTCString();
         }
 
         const str = `${ key }=${ val }${ expires }`;
