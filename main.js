@@ -1,10 +1,12 @@
 const link = 'http://www.7timer.info/bin/api.pl?lon=113.17&lat=23.09&product=astro&output=json';
 
-fetch(link).then(r => r.json()).then(console.log);
+fetch(link).then(r => r.json()).then(d => {
+    console.log(d);
+});
 
-const r = await fetch(link);
-const d = await r.json();
-console.log(d);
+// const r = await fetch(link);
+// const d = await r.json();
+// console.log(d);
 
 function myF(url){
     const f =  new Promise((res, rej) => {
