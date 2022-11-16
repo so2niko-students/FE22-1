@@ -1,50 +1,66 @@
-//1. Выгружаю данные с файла
-const DATA = {
-    URL : './data.json',
-    USER : {}
-};
-
-fetch(DATA.URL).then(r => r.json()).then((d) => {
-    DATA.USER = d;
-    renderUserInfo(d);
-});
-
-//2. Отрендерить данные на странице
-function renderUserInfo({ name, email, dob, password }){
-    const html = `<div class="name">${ name }</div>
-    <div class="password">${ password }</div>
-    <div class="dob">${ dob }</div>
-    <div class="mail">${ email }</div>`;
-
-    document.querySelector('.info-user').innerHTML = html;
+const DOM = {
+    btnFind : document.querySelector('.btn-find'),
+    inpArt : document.querySelector('.inp-artist'),
+    main : document.querySelector('main')
 }
 
-//3. Отрендерить форму при нажатии на кнопку
-const USER_FORM = {
-    selectors : ['inp-name', 'inp-password', 'inp-dob', 'inp-email']
+const URL = {
+    artist : 'https://collectionapi.metmuseum.org/public/collection/v1/search?hasImages=true&q=',
+    object : 'https://collectionapi.metmuseum.org/public/collection/v1/objects/'
 }
 
-USER_FORM.elements = USER_FORM.selectors.reduce((acc, s) => {
-    const name = s.split('-').slice(-1);
-    acc[name] = document.querySelector(`.${ s }`);
-    return acc;
-}, {});
+const DATA = [];
 
-const modal = document.querySelector('.modal');
+const MAX_REQUESTS = 50;
 
-document.querySelector('.btn-change').addEventListener('click', () => {
-    modal.classList.remove('hide');
-    Object.entries(USER_FORM.elements).forEach(([key, val]) => {
-        val.value = DATA.USER[key];
+DOM.btnFind.addEventListener('click', findArtist);
+
+async function findArtist(){
+    DOM.main.innerHTML = '';
+    const artistName = DOM.inpArt.value;
+    const artistURL = `${ URL.artist }${ artistName }`;
+
+    const r = await fetch(artistURL);
+    const d = await r.json();
+
+    console.log(d);
+    const howTimes = d.total / MAX_REQUESTS;
+    for(let i = 0; i <= howTimes; i++){
+        const from = i * MAX_REQUESTS;
+        const to = from + MAX_REQUESTS;
+        const next50 = d.objectIDs.slice(from, to);
+
+        setTimeout(() => {
+            console.log('REQUEST: ', i);
+            makeMultiRequests(next50, artistName);
+        }, i * 2000);
+    }    
+}
+
+async function makeMultiRequests(ids, artistName){
+    console.log(ids);
+    const artistRE = new RegExp(artistName, 'ig');
+    const promises = ids.map(id => {
+        const objectURL = `${ URL.object }${ id }`;
+        return fetch(objectURL).then(r => r.json());
     });
-});
 
-//4. Сохранение данных после редактирования
-document.querySelector('.btn-save').addEventListener('click', () => {
-    modal.classList.add('hide');
-    Object.entries(USER_FORM.elements).forEach(([key, val]) => {
-        DATA.USER[key] = val.value;
-    });
+    const datas = await Promise.all(promises);
+    const datasFiltered = datas.filter(({ artistDisplayName, primaryImage }) => artistRE.test(artistDisplayName) && primaryImage);
+    console.log(datas);
+    console.log(datasFiltered);
 
-    renderUserInfo(DATA.USER);
-});
+    DOM.main.innerHTML += datasFiltered.reduce((html, art) => `${ html }${ render(art) }`, '');
+    DATA.push(...datasFiltered);
+}
+
+function render({ primaryImage, title }){
+    return `
+<div class="card" style="width: 18rem;">
+    <img src="${ primaryImage }" class="card-img-top" alt="...">
+    <div class="card-body">
+        <p class="card-text">${ title }</p>
+    </div>
+</div>
+    `;
+}
