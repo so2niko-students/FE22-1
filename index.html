@@ -1,29 +1,65 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="dashboard.css">
-</head>
-<body>
-    <head></head>
-    <main>
-        <div class="info">
-            <div class="info-user"></div>
-            <button class="btn-change">Change</button>
-        </div>
-        <div class="modal hide">
-            <div><input type="text" class="inp-name" placeholder="name"></div>
-            <div><input type="email" class="inp-email" placeholder="email"></div>
-            <div><input type="password" class="inp-password" placeholder="password"></div>
-            <div><input type="date" class="inp-dob" placeholder="dob"></div>
-            <button class="btn-save">Save</button>
-        </div>
-    </main>
-    <footer></footer>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      crossorigin
+      src="https://unpkg.com/react@18/umd/react.development.js"
+    ></script>
+    <script
+      crossorigin
+      src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"
+    ></script>
+    <style>
+      .red {
+        color: red;
+      }
 
-    <script src="./main.js"></script>
-</body>
+      h1 {
+        font-family: Arial, Helvetica, sans-serif;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="dominator"></div>
+
+    <script>
+      const Movie = (props) => {
+         return React.createElement("article", {}, [
+          React.createElement("h2", {}, props.name),
+          React.createElement("p", {}, props.year),
+        ]);
+      }
+
+      const movies = [
+        {
+          name: "3 тысячи лет желаний",
+          year: 2022,
+        },
+        {
+          name: "Черный Адам",
+          year: 2022,
+        },
+        {
+          name: "Wednesday",
+          year: 2022,
+        },
+        {
+          name: "Человек-Бензопила",
+          year: 2022,
+        },
+      ];
+
+      const moviesArr = movies.map(({ name, year }) => {
+        return React.createElement(Movie, { name, year });
+      });
+
+      const ROOT_DOM = document.querySelector("#dominator");
+      const root = ReactDOM.createRoot(ROOT_DOM);
+      root.render(React.createElement("main", {}, moviesArr));
+    </script>
+  </body>
 </html>
