@@ -1,0 +1,16 @@
+[
+    {
+        "image" : "https://img.pokemondb.net/artwork/large/bulbasaur.jpg",
+        "name" : "Bulbasaur",
+        "number" : 1,
+        "height" : "0.7 m",
+        "weight" : "6.9 kg"
+    },
+    {
+        "image" : "https://img.pokemondb.net/artwork/large/slowpoke.jpg",
+        "name" : "Slowpoke",
+        "number" : 70,
+        "height" : "1.2 m",
+        "weight" : "36.0 kg"
+    }
+]
