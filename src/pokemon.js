@@ -2,9 +2,11 @@ import { useState } from "react";
 
 export default function Pokemon({ image, number, weight, name, height }){
     const [likes, setLikes] = useState(0);
+    // let likes = 0;
     console.count(name);
 
     const addLike = () => setLikes(likes + 1);
+    // const addLike = () => likes++;
 
     return (
         <div>
