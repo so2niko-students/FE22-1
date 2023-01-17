@@ -8,6 +8,7 @@ import {
   Link,
   RouterProvider
 } from 'react-router-dom';
+import Hooks from './hooks/hooks';
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,7 @@ const router = createBrowserRouter([
       <div>
         <Link to="/">go to tic tac toe</Link>
         <Link to="/pokemon">go to Pokemon</Link>
+        <Link to="/hooks">go to Hooks</Link>
         <Game />
       </div>
     ),
@@ -26,7 +28,19 @@ const router = createBrowserRouter([
       <div>
         <Link to="/">go to tic tac toe</Link>
         <Link to="/pokemon">go to Pokemon</Link>
+        <Link to="/hooks">go to Hooks</Link>
         <App />
+      </div>
+    ),
+  },
+  {
+    path: "/hooks",
+    element: (
+      <div>
+        <Link to="/">go to tic tac toe</Link>
+        <Link to="/pokemon">go to Pokemon</Link>
+        <Link to="/hooks">go to Hooks</Link>
+        <Hooks />
       </div>
     ),
   },
