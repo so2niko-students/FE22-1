@@ -1,0 +1,19 @@
+.selected {
+	border: 1px solid black; 
+}
+
+.almazik:after {
+ content: "\1F539";
+}
+
+.rubinchik:after {
+ content: "\1F53A";
+}
+
+.topazik:after {
+ content: "\1F7E0";
+}
+
+.izumrudik:after {
+ content: "\1F7E9";
+}
